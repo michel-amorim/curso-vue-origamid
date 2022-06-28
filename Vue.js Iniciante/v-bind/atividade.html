@@ -2,20 +2,23 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Atividade</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <script src="./vue.js"></script>
+    <title>Vue.js</title>
   </head>
+
   <body>
     <style>
       .verde {
-        color: green;
+        color: rgb(91, 186, 91);
       }
+
       .vermelho {
         color: red;
       }
     </style>
+
     <div id="app">
       <div>
         <p>{{google.companyName}}</p>
@@ -32,6 +35,7 @@
 
       <button @click="puxarDados">Puxar Dados</button>
     </div>
+
     <script>
       const vm = new Vue({
         el: "#app",
@@ -45,8 +49,8 @@
               "https://cloud.iexapis.com/stable/stock/googl/quote?token=pk_ffcb30dc2d6f4376b88f702e4444f02b"
             )
               .then((r) => r.json())
-              .then((json) => {
-                this.google = json;
+              .then((google) => {
+                this.google = google;
               });
           },
           fetchApple() {
@@ -54,14 +58,14 @@
               "https://cloud.iexapis.com/stable/stock/aapl/quote?token=pk_ffcb30dc2d6f4376b88f702e4444f02b"
             )
               .then((r) => r.json())
-              .then((json) => {
-                this.apple = json;
+              .then((apple) => {
+                this.apple = apple;
               });
           },
-        },
-        puxarDados() {
-          this.fetchApple();
-          this.fetchGoogle();
+          puxarDados() {
+            this.fetchGoogle();
+            this.fetchApple();
+          },
         },
       });
     </script>
