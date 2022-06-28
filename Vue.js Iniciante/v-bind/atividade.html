@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Atividade</title>
+    <script src="./vue.js"></script>
+  </head>
+  <body>
+    <style>
+      .verde {
+        color: green;
+      }
+      .vermelho {
+        color: red;
+      }
+    </style>
+    <div id="app">
+      <div>
+        <p>{{google.companyName}}</p>
+        <p :class="google.marketCap > apple.marketCap ? 'verde' : 'vermelho'">
+          {{google.marketCap}}
+        </p>
+      </div>
+      <div>
+        <p>{{apple.companyName}}</p>
+        <p :class="apple.marketCap > google.marketCap ? 'verde' : 'vermelho'">
+          {{apple.marketCap}}
+        </p>
+      </div>
+
+      <button @click="puxarDados">Puxar Dados</button>
+    </div>
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          google: {},
+          apple: {},
+        },
+        methods: {
+          fetchGoogle() {
+            fetch(
+              "https://cloud.iexapis.com/stable/stock/googl/quote?token=pk_ffcb30dc2d6f4376b88f702e4444f02b"
+            )
+              .then((r) => r.json())
+              .then((json) => {
+                this.google = json;
+              });
+          },
+          fetchApple() {
+            fetch(
+              "https://cloud.iexapis.com/stable/stock/aapl/quote?token=pk_ffcb30dc2d6f4376b88f702e4444f02b"
+            )
+              .then((r) => r.json())
+              .then((json) => {
+                this.apple = json;
+              });
+          },
+        },
+        puxarDados() {
+          this.fetchApple();
+          this.fetchGoogle();
+        },
+      });
+    </script>
+  </body>
+</html>
