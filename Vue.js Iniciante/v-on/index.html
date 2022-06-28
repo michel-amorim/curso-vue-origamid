@@ -8,6 +8,15 @@
     <title>Vue.js</title>
   </head>
   <body>
+    <style>
+      .azul {
+        color: blue;
+      }
+
+      .vermelho {
+        color: red;
+      }
+    </style>
     <div id="app">
       <div>
         <button v-on:click="aumentar">+</button>
@@ -16,8 +25,8 @@
       </div>
       <div>
         <button @click="ativo = !ativo">Toggle</button>
-        <p v-if="ativo">Ativo</p>
-        <p v-else>Negado</p>
+        <p class="azul" v-if="ativo">Ativo</p>
+        <p class="vermelho" v-else>Negado</p>
       </div>
       <a href="#interno" @click.prevent.once="handleclick">Link interno</a>
       <!--
